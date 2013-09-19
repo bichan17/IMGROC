@@ -1,0 +1,5 @@
+AuthUserFile /home/ewb2749/.htpasswd
+AuthType Basic
+AuthName "Enter Your Password"
+
+require user iradmin
