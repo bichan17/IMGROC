@@ -11,4 +11,6 @@
 |
 */
 
-Route::resource('provocations', 'ProvocationsController');
+Route::get('/', array('as' => 'index', 'uses' => 'ProvocationsController@index'));
+Route::get('/submit', array('as' => 'submit', 'uses' => 'ProvocationController@create'));
+Route::post('/submit', array('uses' => 'ProvocationController@store'));

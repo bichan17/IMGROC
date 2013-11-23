@@ -21,9 +21,9 @@ class ProvocationsController extends BaseController {
 	 */
 	public function index()
 	{
-		$provocations = $this->provocation->all();
+		$provocation = Provocation::order_by(DB::raw('RAND()'))->get();
 
-		return View::make('provocations.index', compact('provocations'));
+		return View::make('provocations.index', compact('provocation'));
 	}
 
 	/**
@@ -116,16 +116,30 @@ class ProvocationsController extends BaseController {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified resource from being used.
+	 *
+	 * NOTE: this performs a soft delete, use destroy() to permanently remove
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function trash($id)
 	{
 		$this->provocation->find($id)->delete();
 
 		return Redirect::route('provocations.index');
 	}
 
+	/**
+	 * Permanently remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$this->provocation->find($id)->forceDelete();
+
+		return Redirect::route('provocations.index');
+	}
 }

@@ -18,8 +18,9 @@ class CreateProvocationsTable extends Migration {
 			$table->string('source');
 			$table->string('img');
 			$table->text('caption');
-			$table->integer('mod_status');
+			$table->integer('mod_status')->default(0); // 0: in mod queue, 1: approved, 2: rejected
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
