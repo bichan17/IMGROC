@@ -11,3 +11,4 @@
 |
 */
 
+Route::resource('provocations', 'ProvocationsController');
