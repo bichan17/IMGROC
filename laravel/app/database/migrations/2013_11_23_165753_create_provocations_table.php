@@ -18,7 +18,6 @@ class CreateProvocationsTable extends Migration {
 			$table->string('source');
 			$table->string('img');
 			$table->text('caption');
-			$table->integer('submitted_by');
 			$table->integer('mod_status');
 			$table->timestamps();
 		});

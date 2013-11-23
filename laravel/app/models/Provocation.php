@@ -8,7 +8,6 @@ class Provocation extends Eloquent {
 		'source' => 'required',
 		'img' => 'required',
 		'caption' => 'required',
-		'submitted_by' => 'required',
 		'mod_status' => 'required'
 	);
 }
