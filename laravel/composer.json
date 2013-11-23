@@ -1,10 +1,11 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
+	"name": "vladionescu/IMGROC",
+	"description": "IMGROC refreshed and redesigned on the Laravel 4 framework.",
+	"keywords": ["rochester", "framework", "laravel"],
+	"license": "",
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+	        "way/generators": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
