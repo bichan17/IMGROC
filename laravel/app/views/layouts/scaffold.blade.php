@@ -36,8 +36,9 @@
 			    {{ HTML::link('logout', 'Logout') }}
 			@endif
 		    </div>
-
+		    <div id="provContainer">
 			@yield('main')
+		    </div>
 		</div>
 	</body>
 </html>

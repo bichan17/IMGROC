@@ -18,7 +18,7 @@ Route::get('/debug', function() {
 
 Route::get('/', array('as' => 'index', 'uses' => 'ProvocationsController@index'));
 
-Route::post('/login', array('as' => 'login', 'uses' => 'UsersController@login'));
+Route::any('/login', array('as' => 'login', 'uses' => 'UsersController@login'));
 Route::post('/admin', array('uses' => 'UsersController@login'));
 Route::get('/logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 Route::get('/admin', array('as' => 'admin', 'uses' => 'UsersController@dashboard'));
