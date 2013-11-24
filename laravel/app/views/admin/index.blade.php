@@ -4,9 +4,7 @@
 
 <h1>All Provocations</h1>
 
-<p>{{ link_to_route('provocations.create', 'Add new provocation') }}</p>
-
-@if ($provocations->count())
+@if (!empty($provocations) && $provocations->count())
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
@@ -46,4 +44,4 @@
 	There are no provocations.
 @endif
 
-@stop
+@top

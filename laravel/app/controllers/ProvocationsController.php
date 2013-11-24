@@ -23,7 +23,7 @@ class ProvocationsController extends BaseController {
 	{
 		$provocation = Provocation::order_by(DB::raw('RAND()'))->get();
 
-		return View::make('provocations.index', compact('provocation'));
+		return View::make('imgroc.index', compact('provocation'));
 	}
 
 	/**
@@ -33,7 +33,7 @@ class ProvocationsController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('provocations.create');
+		return View::make('imgroc.create');
 	}
 
 	/**
@@ -50,10 +50,10 @@ class ProvocationsController extends BaseController {
 		{
 			$this->provocation->create($input);
 
-			return Redirect::route('provocations.index');
+			return Redirect::route('imgroc.index')->with('message', 'Your submission has been sent!');
 		}
 
-		return Redirect::route('provocations.create')
+		return Redirect::route('imgroc.create')
 			->withInput()
 			->withErrors($validation)
 			->with('message', 'There were validation errors.');
@@ -84,7 +84,7 @@ class ProvocationsController extends BaseController {
 
 		if (is_null($provocation))
 		{
-			return Redirect::route('provocations.index');
+			return Redirect::route('admin.index');
 		}
 
 		return View::make('provocations.edit', compact('provocation'));

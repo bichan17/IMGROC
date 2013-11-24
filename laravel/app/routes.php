@@ -11,6 +11,17 @@
 |
 */
 
+Route::get('/debug', function() {
+    Session::flash('message', 'debug route');
+    return View::make('admin.login');
+});
+
 Route::get('/', array('as' => 'index', 'uses' => 'ProvocationsController@index'));
+
+Route::post('/login', array('as' => 'login', 'uses' => 'UsersController@login'));
+Route::post('/admin', array('uses' => 'UsersController@login'));
+Route::get('/logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
+Route::get('/admin', array('as' => 'admin', 'uses' => 'UsersController@dashboard'));
+
 Route::get('/submit', array('as' => 'submit', 'uses' => 'ProvocationController@create'));
 Route::post('/submit', array('uses' => 'ProvocationController@store'));

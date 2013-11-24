@@ -2,4 +2,422 @@
  * IMGROC custom, site-specific CSS
  * This should override bootstrap's CSS
  */
+@font-face { 
+    font-family: 'IconicStroke'; 
+    src: url('fonts/iconic_stroke.eot'); 
+    src: url('fonts/iconic_stroke.eot?#iefix') format('embedded-opentype'), 
+	 url('fonts/iconic_stroke.ttf') format('truetype'), 
+	 url('fonts/iconic_stroke.svg#iconic') format('svg'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
 
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F5F5F5;
+}
+
+.container {
+    width: 968px;
+    height: 100%;
+    margin: 0 auto; /* the bottom margin is the negative value of the footer's height */
+    overflow: hidden;
+}
+
+#sideButtons{
+    float: left;
+    width: 130px;
+    margin-right: 20px;
+}
+#provContainer{
+    width: 780px;
+    float: right;
+    position: relative;
+    height: 82%;
+    overflow: hidden;
+}
+.overlay {
+    padding: 10px;
+
+}
+a#introLink.fancybox{
+    display: none;
+}
+#intro .overlayContent{
+    height: 232px;
+    margin-top: -116px;
+}
+#about .overlayContent{
+    height: 600px;
+    margin-top: -300px;
+    overflow: scroll;
+}
+.outer-center {
+    float: right;
+    right: 50%;
+    position: relative;
+}
+.inner-center {
+    float: right;
+    right: -50%;
+    position: relative;
+}
+.clear {
+    clear: both;
+}
+/*.overlayWrap{
+    
+}*/
+/*.overlayContent{
+    position: absolute;
+    width: 968px;
+    
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    margin-left: -484px;
+    
+    padding: 10px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+}*/
+/*.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    cursor: pointer;
+}*/
+
+/*for 980px or less*/
+@media screen and (max-width: 980px){
+    .container {
+	width: 94%;
+    }
+    #sideButtons{
+	width: 13.42975%;
+	margin-right: 2.066157%
+    }
+    #provContainer{
+	width: 82.4380165%;
+    }
+}
+
+
+/*.footer, .push {
+    height: 59px;  .push must be the same height as .footer 
+    min-width: 625px;
+}
+*/
+
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: #727272;
+}
+#intro{
+    display: none;
+}
+#intro p{
+    font-size: 22px;
+    /*position: relative;*/
+}
+.overlay h2{
+    margin-bottom: 20px;
+}
+#about p{
+    margin-bottom: 20px;
+}
+#about{
+    display: none;
+}
+#topButtons, #form{
+    width: 100%;
+    margin: 0 auto;
+}
+#content{
+    max-height: 88%
+
+}
+#content img{
+    max-height: 75%;
+    max-width: 100%
+}
+.provTypeImage{
+    /*width: 814px;*/
+}
+.captionURL h4{
+    /*margin: 0 auto;*/
+    /*width: 80%*/
+}
+
+.provTypeLink h3{
+    font-size: 22pt;
+}
+
+#topButtons{
+    position: relative;
+    height: 80px; /*look into alternates for this*/
+}
+#topButtons h1{
+    float: left;
+    padding-top: 21px;
+}
+.icon{
+    display:block; 
+    text-align: center;
+    font-size: 32pt;
+
+    font-family: 'IconicStroke';
+}
+#refreshIcon:before{
+    content: '\2192'
+}
+#exploreIcon:before{
+    content: '\e040'
+}
+a#seeNext{
+    /*float: right;*/
+}
+
+/*#submitIcon:before{
+    content: '\e000'
+}*/
+/*#shareIcon:before{
+    content: '\e007'
+}*/
+/*#viewIcon:before{
+    content: '\e074'
+}*/
+#textIcon:before{
+    content: '\e005'
+}
+#imageIcon:before{
+    content: '\e027'
+}
+#linkIcon:before{
+    content: '\e077'
+}
+#nextArrow:before{
+    content: '\e015';
+}
+
+#sideButtons a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    font-size: 11pt;
+    margin-bottom: 40px;
+}
+/*#sideButtons a:hover{
+    background-color: black;
+    color: white;
+}*/
+.button{
+    background-color: gray;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 5px;
+}
+#topButtons a{
+    float: right;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+#cta{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 12%;
+
+}
+#cta #botButtons{
+    margin: 0 auto;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -11.157517899%;
+    width: 22.3150357%;
+    height: 60px;
+}
+#explore{
+    float: left;
+}
+#next{
+    float: right;
+}
+#explore, #next{
+    
+    display: inline-block;
+    position: relative;
+    /*width: 50%;*/
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#cta #botButtons a{
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    text-align: center;
+
+}
+#cta #botButtons a:first-child{
+    /*margin-right: 126px;*/
+}
+a.submitButton{
+    margin-right: 30px;
+}
+.header{
+    padding-top: 2.081165%;
+    /*padding-bottom: 5.41103%;*/
+}
+
+.header img{
+    height: 73px; 
+}
+.footer{
+    background-color: black;
+}
+.footer ul{
+    width: 625px; /*fix hardcoding*/
+    margin: 0 auto;
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    list-style-type: none;
+    list-style: none;
+    white-space: nowrap;
+    font-family: 'Roboto', sans-serif;
+}
+.footer ul li{
+    display: inline;
+}
+.footer ul li a{
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.footer ul li a:hover{
+    text-decoration: underline;
+}
+
+
+#form h1{
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+#textForm{
+    display: none;
+}
+#imageForm{
+    display: none;
+}
+#linkForm{
+    display: none;
+}
+#submitTypeButtons{
+    margin: 0 auto;
+    padding: 10px 0;
+}
+.formDiv h2{
+    padding-bottom: 10px;
+}
+.formDiv p{
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.formDiv input{
+    margin: 3px 0px;
+}
+.introContent{
+    font-size: 24pt;
+}
+.introContent .icon{
+    float: right;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+a#nextIntro{
+    margin-top: 100px;
+    display: block;
+    text-decoration: none;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+div.container div#content.introContent.c2{
+    display: none;
+    font-size: 16pt;
+}
+.c2 h2{
+    font-size: 16pt;
+    font-weight: normal;
+    /*font-style: italic;*/
+    padding-bottom: 20px;
+}
+.c2 p#p2{
+    font-size: 14pt;
+}
+#getStarted{
+    margin: 40px auto;
+    width: 125px;
+    display: block;
+    white-space: nowrap;
+    font-size: 20pt;
+}
+.infoPage h2{
+    font-size: 16pt;
+    font-weight: normal;
+    font-style: italic;
+    padding-bottom: 20px;
+}
+.infoPage p{
+    margin-bottom: 20px;
+}
+.provContent{
+    padding-bottom: 25px;
+}
+#provInfo{
+    padding-top: 40px;
+    margin: 0 auto;
+    display: table;
+    /*width: 21%*/
+}
+
+#provocationsTable {
+    margin:0 auto;
+}
+#copyNotice{
+    display: none;
+}
+
+/**
+ * Bootstrap Overrides / Customizations
+ */
+.alert {width:500px; float:right; position:absolute; top:30px; margin-left:200px;}
+
+/**
+ * Login Form
+ */
+form.form-signin {margin-top:-20px; margin-left:50px;}
+form.form-signin h2 {margin-bottom:30px;}
+form.form-signin input[name="username"] {}
+form.form-signin input[name="password"] {margin-left:10px;}
+form.form-signin input[type="submit"] {width:400px; margin-top:10px;}
