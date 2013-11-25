@@ -1,12 +1,12 @@
 		</div> <!-- end wrapper div -->
-		<div class="footer">
+		<!-- <div class="footer">
 			<ul>
-				<li><a href="../imgroc/index.php">INTRODUCTION</a></li>
-				<li><a href="../imgroc/index.php/provocation/">PROVOCATIONS</a></li>
-				<li><a href="../imgroc/index.php/manifesto/">OUR MANIFESTO</a></li>
-				<li><a href="../imgroc/index.php/about/">ABOUT THIS PROJECT</a></li>
+				<li><a href="/index.php/intro/">Introduction</a></li>
+				<li><a href="/index.php/provocation/">Provocations</a></li>
+				<li><a href="/index.php/manifesto/">Our Manifesto</a></li>
+				<li><a href="/index.php/about/">About This Project</a></li>
 			</ul>
-		</div>
+		</div> -->
 
 	</body>
 </html>

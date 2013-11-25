@@ -84,6 +84,47 @@ app.submit = (function(){
 })();
 
 app.provocation = (function(){
+	function closeOverlay(){
+		$("div.overlay").fadeOut("fast");
+	}
+	function showOverlay(overlay){
+		$("#"+overlay).fadeIn("fast");
+
+	}
+
+	function getProvocation(){
+		$.ajax({
+				url: "/common.php?f=random&callback=data",
+				success: function(data){
+					//console.log(eval(data));
+					data = eval(data);
+					// console.log(data);
+					
+					//echo "<h1>{$data['title']}</h1>\n";
+					//		echo "<h3>Added by {$data['author']} at " . date('F d, Y', $data['timestamp']) . "</h3>\n";
+					//		echo "{$data['data']}\n";
+					
+					
+					var a = new Date(data.timestamp * 1000);
+					var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+					
+					var html = "";
+					// html += "<h1>" + data.title + "</h1>";
+					html += "<div class='outer-center'><div class='inner-center'>";
+					html += "" + data.data + "";
+					html += "</div></div><div class='clear'></div>";
+					// html += "<p id='provInfo'>By " + data.author + "<br>Added " + months[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + "</p>";
+
+					
+					//console.log($("#content").html());
+					$("#content").html(html);
+					
+					// Update the URL in the address bar
+					// window.history.pushState("", "", "" + data.id);
+				}
+			});
+
+	}
 	
 	function init(){
 		console.log("inside provocation.init!");
@@ -97,40 +138,45 @@ app.provocation = (function(){
 
 
 		} );
+
+		$(".fancybox").fancybox({
+			autoSize : false,
+			// padding: [25,25,25,25],
+			beforeLoad : function() {         
+	            this.width  = parseInt(this.element.data('fancybox-width'));  
+	            this.height = parseInt(this.element.data('fancybox-height'));
+        	}
+		});
+
+		$("#introLink").trigger('click');
+
+
+
+
+		// $("span.close").click(function(){
+		// 	closeOverlay();
+		// });
+		// $("span#nextArrow").click(function(){
+		// 	closeOverlay();
+		// });
+		// // $("#introLink").click(function(){
+		// // 	showOverlay("intro");
+		// // });
+		// $("#aboutLink").click(function(){
+		// 	showOverlay("about");
+		// })
+		
+
+		getProvocation();
+
+
 		
 
 
 
 		$("#seeNext").click(function(){
 			//console.log("clicked on button");
-			$.ajax({
-				url: "/common.php?f=random&callback=data",
-				success: function(data){
-					//console.log(eval(data));
-					data = eval(data);
-					//console.log("success - " + data);
-					
-					//echo "<h1>{$data['title']}</h1>\n";
-					//		echo "<h3>Added by {$data['author']} at " . date('F d, Y', $data['timestamp']) . "</h3>\n";
-					//		echo "{$data['data']}\n";
-					
-					
-					var a = new Date(data.timestamp * 1000);
-					var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-					
-					var html = "";
-					// html += "<h1>" + data.title + "</h1>";
-					html += "" + data.data + "";
-					html += "<h3 id='provInfo'>By " + data.author + "<br>Added " + months[a.getMonth()] + " " + a.getDate() + ", " + a.getFullYear() + "</h3>";
-
-					
-					//console.log($("#content").html());
-					$("#content").html(html);
-					
-					// Update the URL in the address bar
-					window.history.pushState("", "", "" + data.id);
-				}
-			});
+			getProvocation();
 		});
 	}
 	

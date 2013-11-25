@@ -1,4 +1,4 @@
-<?php $customScripts = array("/scripts/loader.js"); $title = "Imag(in)ing Rochester - Submit New Provocation"; include("header.php"); ?>
+<?php $customScripts = array("/scripts/loader.js"); $title = "IMG/ROC - Submit New Provocation"; include("header.php"); ?>
 
 
 		<!-- <div id="topButtons">
@@ -7,18 +7,17 @@
 		<div id="form">
 			<div id ="topButtons">
 				<h1>SHARE YOUR STORY / SUBMIT A PROVOCATION</h1>
-				<a href="#"id="textButton"><span class="icon" id="textIcon"></span>Text</a>
-				<a href="#"id="imageButton"><span class="icon" id="imageIcon"></span>Image</a>
-				<a href="#"id="linkButton"><span class="icon" id="linkIcon"></span>Link</a>
+				<!-- <a href="#" id="textButton"><span class="icon" id="textIcon"></span>Text</a>
+				<a href="#" class="submitButton" id="imageButton"><span class="icon" id="imageIcon"></span>Image</a>
+				<a href="#" class="submitButton" id="linkButton"><span class="icon" id="linkIcon"></span>Link</a> -->
 			</div>
 			<div id="default">
-				<p>Please select a submission type.</p>
+				<p>This feature of the website is under construction. Thank you for your patience. <br>If you would like to share a provocation with us in the meantime, we are accepting submissions at <a href="mailto:imgroc@gmail.com">imgroc@gmail.com</a>.<br><br><a href="http://www.imgroc.com">Return to provocations</a></p>
 			</div>
 
-			<div class="formDiv" id="textForm">
+			<!-- <div class="formDiv" id="textForm">
 				<h2>Text Provocation</h2>
 				<form enctype="multipart/form-data" action="../common.php" method="post">
-					<!-- Title: <input type="text" name="title"><br> -->
 					Author: <input type="text" name="author" placeholder="optional"><br>
 				  <div id="toolbar" style="display: none;">
 				    <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
@@ -63,7 +62,6 @@
 			<div class="formDiv" id="imageForm">
 				<h2>Image Provocation</h2>
 				<form enctype="multipart/form-data" action="../common.php" method="post">
-					<!-- Title: <input type="text" name="title"><br> -->
 					Author: <input type="text" name="author" placeholder="optional"><br>
 					
 					Image URL: <input type="text" name="fileURL"><br>
@@ -82,7 +80,6 @@
 			<div class="formDiv" id="linkForm">
 				<h2>Link Provocation</h2>
 				<form enctype="multipart/form-data" action="../common.php" method="post">
-					<!-- Title: <input type="text" name="title"><br> -->
 					Author: <input type="text" name="author" placeholder="optional"><br>
 					Link Text: <input type="text" name="linkText"><br>
 					Link URL: <input type="text" name="linkURL" value="http://"><br>
@@ -93,10 +90,9 @@
 				  <input type="hidden" name="type" value="link">
 				</form>
 				<p>Please note that all submissions are moderated by us and are not guaranteed posting on the site.</p>
-			</div>
+			</div> -->
 			
 		</div>
-		<div class="push"></div>
 
 		
 

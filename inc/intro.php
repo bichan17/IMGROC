@@ -1,4 +1,4 @@
-<?php $customScripts = array("../imgroc/scripts/introLoader.js"); $title = "Imag(in)ing Rochester - Introduction"; include("header.php"); ?>
+<?php $customScripts = array("/scripts/introLoader.js"); $title = "Imag(in)ing Rochester - Introduction"; include("header.php"); ?>
 
 
 			<div class="introContent c1" id="content">

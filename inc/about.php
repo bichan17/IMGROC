@@ -40,10 +40,9 @@
 			</p>
 			<p>
 				If you're interested in collaborating with us or have questions, comments, or suggestions, send
-			us an email at <a href="mailto:contact@imgroc.com">contact@imgroc.com</a>.
+			us an email at <a href="mailto:imgroc@gmail.com">imgroc@gmail.com</a>.
 			</p>
 		</div>
-		<div class="push"></div>
 
 	
 

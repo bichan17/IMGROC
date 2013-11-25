@@ -4,8 +4,7 @@
 	
 	
 	// Grab the URI
-	// $URI = getCurrentURI();
-	$URI = $_SERVER["REQUEST_URI"];
+	$URI = getCurrentURI();
 	echo "current URI: " . $URI;
 
 ?>
