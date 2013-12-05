@@ -4,7 +4,7 @@
 
 <h1>All Provocations</h1>
 
-<p>{{ link_to_route('provocations.create', 'Add new provocation') }}</p>
+<p>{{ link_to_route('submit', 'Add new provocation') }}</p>
 
 @if ($provocations->count())
 	<table class="table table-striped table-bordered">

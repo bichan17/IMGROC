@@ -4,7 +4,8 @@ class UsersController extends BaseController {
     // otherwise, prompt for login
     public function dashboard() {
 	if(Auth::check()) {
-	    return View::make('admin.index');
+	    //return View::make('admin.index');
+	    return Redirect::route('modqueue');
 	} else {
 	    return Redirect::route('login')->withInput();
 	}
@@ -32,6 +33,55 @@ class UsersController extends BaseController {
 	Auth::logout();
 	Session::flash('message', 'Your are now logged out!');
 	return Redirect::route('index');
+    }
+
+    public function account() {
+	$user = Auth::user();
+    
+	return View::make('admin.account', compact('user'));
+    }
+
+    public function editaccount() {
+	// get only the stuff we care about
+	$input = Input::only('id', 'fullname', 'email', 'username', 'password', 'password_confirmation', 'notes', 'admin_level');
+
+	// load the User we'll be working with
+	$user = User::findOrFail($input["id"]);
+
+	// validation rules
+	$rules = array(
+		'fullname'	=> 'min:3|max:50|required',
+		'email'		=> 'min:3|max:50|email|required',
+		'username'	=> 'max:20|in:'.$user->username.'|required',
+		'admin_level'	=> 'in:0,1|required'
+	);
+
+	// store the input values
+	$user->fullname = $input["fullname"];
+	$user->email = $input["email"];
+	$user->admin_level = $input["admin_level"];
+	if(!empty($input["notes"])) $user->notes = $input["notes"];
+	
+	// did we get a password? is it valid?
+	if(!empty($input["password"]) || !empty($input["password_confirmation"])) {
+	    $rules['password'] = 'min:6|confirmed';
+	}
+
+	// run the validation rules against our input
+	$validator = Validator::make($input, $rules);
+
+	// if the input is valid, save it. otherwise throw errors
+	if($validator->fails()) $messages = $validator->messages();
+	else {
+	    if(!empty($input["password"]) || !empty($input["password_confirmation"])) $user->password = Hash::make($input["password"]);
+	    $user->save();
+	}
+
+	// if we have errors, show them. otherwise display success
+	if(isset($messages)) return Redirect::route('account')->withErrors($validator);
+	else Session::flash('message', 'Changes saved successfully');
+
+	return Redirect::route('account', compact('user'));
     }
 }
 ?>

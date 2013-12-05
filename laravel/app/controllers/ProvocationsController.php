@@ -21,9 +21,13 @@ class ProvocationsController extends BaseController {
 	 */
 	public function index()
 	{
-		$provocation = Provocation::order_by(DB::raw('RAND()'))->get();
+	    // if a provocation is specified, get that one
+	    if(Input::has('provocation'))
+		$provocation = Provocation::findOrFail(Input::get('provocation'));
+	    else
+		$provocation = Provocation::whereModStatus('1')->orderBy(DB::raw('RAND()'))->get();
 
-		return View::make('imgroc.index', compact('provocation'));
+	    return View::make('imgroc.index', compact('provocation'));
 	}
 
 	/**
@@ -142,4 +146,51 @@ class ProvocationsController extends BaseController {
 
 		return Redirect::route('provocations.index');
 	}
+
+    // display all the provocations in the mod queue
+    public function modqueue() {
+	// get every provocation with mod_status 0
+	$provocations = Provocation::whereModStatus('0')->orderBy('created_at',     'DESC')->get();
+
+	return View::make('admin.modqueue', compact('provocations'));
+    }   
+     
+    // delete, approve, reject from the mod queue
+    public function editprov() {
+	// check for ID, are you 21?
+	if(Input::has('provocation')) $id = Input::get('provocation');
+	else return Response::make('No provocation specified', 400);
+
+	$prov = Provocation::findOrFail($id);
+
+	// are we deleting it, changing the moderation status, or what?
+	if(Input::has('delete')) $prov->delete();
+	elseif(Input::has('destroy')) $prov->destroy();
+	elseif(Input::has('restore')) $prov->restore();
+	elseif(Input::has('status')) $status = Input::get('status');
+	else return Response::make('No change specified', 400);
+
+	// if we're changing the status
+	if($status) {
+	    $prov->mod_status = $status;
+	    $prov->save();
+	}   
+
+	return Response::make('Provocation '.$id.' has been modified', 200);
+    }
+
+    // show all the provocations
+    public function allprovs() {
+	$provocations = Provocation::orderBy('created_at', 'DESC')->get();
+
+	return View::make('admin.provocations', compact('provocations'));
+    }
+
+    // show thrashed provocations
+    public function trashedprovs() {
+	$trash = true;
+	$provocations = Provocation::onlyTrashed()->orderBy('deleted_at', 'DESC')->get();
+
+	return View::make('admin.provocations', compact('provocations', 'trash'));
+    }
 }

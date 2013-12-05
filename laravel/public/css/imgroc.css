@@ -421,3 +421,9 @@ form.form-signin h2 {margin-bottom:30px;}
 form.form-signin input[name="username"] {}
 form.form-signin input[name="password"] {margin-left:10px;}
 form.form-signin input[type="submit"] {width:400px; margin-top:10px;}
+
+/**
+ * Admin Pages
+ */
+#admin-nav h4 {font-size:12px; opacity:0.5; padding-left:5px;}
+.form-horizontal .form-group {margin-left:0; margin-right:0;}

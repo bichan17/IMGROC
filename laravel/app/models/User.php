@@ -56,4 +56,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	/**
+	 * Check if this user is superadmin or moderator
+	 *
+	 * @return boolean
+	 */
+	public function admin() {
+		return ($this->admin_level == 0) ? true : false;
+	}
 }

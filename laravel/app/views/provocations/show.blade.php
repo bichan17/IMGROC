@@ -4,7 +4,7 @@
 
 <h1>Show Provocation</h1>
 
-<p>{{ link_to_route('provocations.index', 'Return to all provocations') }}</p>
+<p>{{ link_to_route('index', 'Return to all provocations') }}</p>
 
 <table class="table table-striped table-bordered">
 	<thead>
