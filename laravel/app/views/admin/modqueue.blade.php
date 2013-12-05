@@ -24,7 +24,7 @@
 		    <td>{{{ $provocation->source }}}</td>
 		    <td>{{{ ($provocation->img) ? '<img src="'.$provocation->img.'" alt="'.$provocation->title.'" />' : 'No image' }}}</td>
 		    <td>{{{ $provocation->caption }}}</td>
-		    <td>{{{ $provication->created_at }}}</td>
+		    <td>{{{ $provocation->created_at }}}</td>
 		    <td>
 			{{ Form::open(array('route' => 'modqueue')) }}
 			    {{ Form::hidden('provocation', $provocation->id) }}

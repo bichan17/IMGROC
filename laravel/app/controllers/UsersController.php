@@ -36,24 +36,33 @@ class UsersController extends BaseController {
     }
 
     public function account() {
-	$user = Auth::user();
+	// admins can specify which user, others can't
+	if(User::find(Auth::user()->id)->admin() && Input::has('id')) $user = User::findOrFail(Input::get('id'));
+	else $user = Auth::user();
     
 	return View::make('admin.account', compact('user'));
     }
 
     public function editaccount() {
 	// get only the stuff we care about
-	$input = Input::only('id', 'fullname', 'email', 'username', 'password', 'password_confirmation', 'notes', 'admin_level');
+	$input = Input::only('id', 'fullname', 'email', 'username', 'password', 'password_confirmation', 'notes', 'admin_level', 'cancel');
 
 	// load the User we'll be working with
 	$user = User::findOrFail($input["id"]);
 
+	// if we are deleting it, don't bother with the rest
+	if((Input::has('cancel') && Input::get('cancel') === "Cancel") || (Input::has('delete') && Input::get('delete'))) {
+	    $user->delete();
+	    Session::flash('message', 'User deleted successfully');
+	    return Redirect::route('users');
+	}
+
 	// validation rules
 	$rules = array(
-		'fullname'	=> 'min:3|max:50|required',
-		'email'		=> 'min:3|max:50|email|required',
-		'username'	=> 'max:20|in:'.$user->username.'|required',
-		'admin_level'	=> 'in:0,1|required'
+	    'fullname'	    => 'min:3|max:50|required',
+	    'email'	    => 'min:3|max:50|email|required',
+	    'username'	    => 'max:20|in:'.$user->username.'|required',
+	    'admin_level'   => 'in:0,1|required'
 	);
 
 	// store the input values
@@ -82,6 +91,27 @@ class UsersController extends BaseController {
 	else Session::flash('message', 'Changes saved successfully');
 
 	return Redirect::route('account', compact('user'));
+    }
+
+    // display all users
+    public function users() {
+	$users = User::all();
+
+	return View::make('admin.users', compact('users'));
+    }
+
+    // i wonder what this does...
+    public function adduser() {
+	// get the highest nr id, so the next User will have that +1
+	$id = User::orderBy('id', 'DESC')->first()->pluck('id');
+
+	$user = new User;
+	$user->id = ++$id;
+
+	// just a flag to enable the cancel/delete button on the editaccount view
+	$delete = true;
+
+	return View::make('admin.account', compact('user', 'delete'));
     }
 }
 ?>

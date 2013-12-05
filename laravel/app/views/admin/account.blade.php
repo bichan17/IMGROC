@@ -16,9 +16,14 @@
 	<div class="col-xs-5">{{ Form::email('email', $user->email, array('class'=>'form-control', 'required' => 'required')) }}</div>
     </div>
 
+    <?php $ro = (isset($user->username)) ? true : false; ?>
     <div class="form-group">
 	{{ Form::label('username', 'Username *', array('class' => 'col-xs-3 control-label')) }}
-	<div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control', 'readonly'=>'readonly')) }}</div>
+	@if(!$ro)
+	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control')) }}</div>
+	@else
+	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control', 'readonly'=>'readonly')) }}</div>
+	@endif
     </div>
 
     <div class="form-group">
@@ -36,15 +41,21 @@
 	<div class="col-xs-5">{{ Form::textarea('notes', $user->notes, array('class' => 'form-control', 'rows' => '3')) }}</div>
     </div>
 
-    @if(User::find($user->id)->admin()) 
+    @if(User::find(Auth::user()->id)->admin()) 
+    <?php if(!isset($user->admin_level)) $user->admin_level = 1; ?>
     <div class="form-group">
 	{{ Form::label('admin_level', 'Admin Level *', array('class' => 'col-xs-3 control-label')) }}
 	<div class="col-xs-5">{{ Form::select('admin_level', array('0'=>'Superadmin', '1'=>'Moderator'), $user->admin_level, array('class' => 'form-control', 'required' => 'required')) }}</div>
     </div>
+    @else
+    {{ Form::hidden('admin_level', $user->admin_level) }}
     @endif
 
     {{ Form::hidden('id', $user->id) }}
-    {{ Form::submit('Save', array('class'=>'col-xs-offset-4 btn btn-primary')) }}
+    {{ Form::submit('Save', array('class'=>'col-xs-offset-3 btn btn-primary')) }}
+    @if(isset($delete) && $delete)
+    {{ Form::submit('Cancel', array('name'=>'cancel','id'=>'cancel','class'=>'col-xs-offset-2 btn btn-warning')) }}
+    @endif
 {{ Form::close() }}
 
 @stop

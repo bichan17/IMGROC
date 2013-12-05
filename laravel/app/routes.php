@@ -42,11 +42,14 @@ Route::group(array('prefix' => '/admin'), function()
     Route::post('/users', array('uses' => 'UsersController@editusers'));
 });
 
+    Route::get('/users/add', array('as' => 'adduser', 'uses' => 'UsersController@adduser'));
+    Route::post('/users/add', array('uses' => 'UsersController@editaccount'));
+
 Route::get('/submit', array('as' => 'submit', 'uses' => 'ProvocationController@create'));
 Route::post('/submit', array('uses' => 'ProvocationController@store'));
 
 App::error(function(ModelNotFoundException $e)
 {
-    Session::flash('message', 'This provocation was not found');
+    Session::flash('message', 'This provocation or user was not found');
     return Redirect::route('index');
 });
