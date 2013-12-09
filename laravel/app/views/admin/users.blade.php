@@ -35,14 +35,11 @@
 		    <td>
 			{{ Form::open(array('route' => 'account')) }}
 			    {{ Form::hidden('id', $user->id) }}
-			    {{ Form::hidden('fullname', $user->fullname) }}
-			    {{ Form::hidden('email', $user->email) }}
-			    {{ Form::hidden('username', $user->username) }}
-			    {{ Form::hidden('notes', $user->notes) }}
-			    {{ Form::hidden('admin_level', $user->admin_level) }}
+			    {{ Form::hidden('edit', 'true') }}
 			    {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
 			{{ Form::close() }}
 		    </td>
+		    @if($user->id !== "1")
 		    <td>
 			{{ Form::open(array('route' => 'account')) }}
 			    {{ Form::hidden('id', $user->id) }}
@@ -50,6 +47,7 @@
 			    {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
 			{{ Form::close() }}
 		    </td>
+		    @endif
 		</tr>
 	    @endforeach
 	</tbody>

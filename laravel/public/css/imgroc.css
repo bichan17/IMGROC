@@ -411,7 +411,10 @@ div.container div#content.introContent.c2{
 /**
  * Bootstrap Overrides / Customizations
  */
+div.container {min-height:2800px;}
+h1 {margin-bottom:20px;}
 .alert {width:500px; float:right; position:absolute; top:30px; margin-left:200px;}
+a.btn {margin-bottom:15px;}
 
 /**
  * Login Form
@@ -427,3 +430,5 @@ form.form-signin input[type="submit"] {width:400px; margin-top:10px;}
  */
 #admin-nav h4 {font-size:12px; opacity:0.5; padding-left:5px;}
 .form-horizontal .form-group {margin-left:0; margin-right:0;}
+.account-save-btn {margin-left:210px; width:130px;}
+.account-cancel-btn {margin-left:30px; width:130px;}

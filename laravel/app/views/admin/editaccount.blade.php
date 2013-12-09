@@ -3,9 +3,9 @@
 @section('main')
 @parent
 
-<h1>Edit Account</h1>
+<h1>Your Account</h1>
 
-{{ Form::open(array('route'=>'editaccount', 'class'=>'user-account form-horizontal', 'role'=>'form')) }}
+{{ Form::open(array('route'=>'account', 'class'=>'user-account form-horizontal', 'role'=>'form')) }}
     <div class="form-group">
 	{{ Form::label('fullname', 'Full Name *', array('class' => 'col-xs-3 control-label')) }}
 	<div class="col-xs-5">{{ Form::text('fullname', $user->fullname, array('class'=>'form-control', 'required' => 'required')) }}</div>
@@ -16,14 +16,13 @@
 	<div class="col-xs-5">{{ Form::email('email', $user->email, array('class'=>'form-control', 'required' => 'required')) }}</div>
     </div>
 
-    <?php $ro = (!empty($user->username)); ?>
+    <?php $ro = (isset($user->username)) ? true : false; ?>
     <div class="form-group">
 	{{ Form::label('username', 'Username *', array('class' => 'col-xs-3 control-label')) }}
-	@if($ro)
-{{ $user }}
-	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control', 'readonly'=>'readonly')) }}</div>
-	@else
+	@if(!$ro)
 	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control')) }}</div>
+	@else
+	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control', 'readonly'=>'readonly')) }}</div>
 	@endif
     </div>
 
@@ -42,21 +41,20 @@
 	<div class="col-xs-5">{{ Form::textarea('notes', $user->notes, array('class' => 'form-control', 'rows' => '3')) }}</div>
     </div>
 
-    @if(User::find(Auth::user()->id)->admin() && $user["id"] !== "1") 
+    @if(User::find(Auth::user()->id)->admin()) 
     <?php if(!isset($user->admin_level)) $user->admin_level = 1; ?>
     <div class="form-group">
 	{{ Form::label('admin_level', 'Admin Level *', array('class' => 'col-xs-3 control-label')) }}
 	<div class="col-xs-5">{{ Form::select('admin_level', array('0'=>'Superadmin', '1'=>'Moderator'), $user->admin_level, array('class' => 'form-control', 'required' => 'required')) }}</div>
     </div>
     @else
-    {{ Session::flash('admin_level', Session::get('admin_level')) }}
+    {{ Form::hidden('admin_level', $user->admin_level) }}
     @endif
 
     {{ Form::hidden('id', $user->id) }}
     {{ Form::submit('Save', array('class'=>'col-xs-offset-3 btn btn-primary account-save-btn')) }}
-    @if(Session::get('newUser'))
+    @if(isset($delete) && $delete)
     {{ Form::submit('Cancel', array('name'=>'cancel','id'=>'cancel','class'=>'btn btn-warning account-cancel-btn')) }}
-    {{ Session::flash('newUser', true) }}
     @endif
 {{ Form::close() }}
 

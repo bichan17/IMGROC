@@ -21,7 +21,7 @@ Route::get('/', array('as' => 'index', 'uses' => 'ProvocationsController@index')
 Route::any('/login', array('as' => 'login', 'uses' => 'UsersController@login'));
 Route::get('/logout', array('as' => 'logout', 'uses' => 'UsersController@logout'));
 
-Route::group(array('prefix' => '/admin'), function()
+Route::group(array('prefix' => '/admin', 'before' => 'auth'), function()
 {
     Route::get('/', array('as' => 'admin', 'uses' => 'UsersController@dashboard'));
     Route::post('/', array('uses' => 'UsersController@login'));
@@ -36,20 +36,19 @@ Route::group(array('prefix' => '/admin'), function()
     Route::post('/provocations/trashed', array('uses' => 'ProvocationsController@editprov'));
 
     Route::get('/account', array('as' => 'account', 'uses' => 'UsersController@account'));
-    Route::post('/account', array('uses' => 'UsersController@editaccount'));
+    Route::post('/account', array('as' => 'editaccount', 'uses' => 'UsersController@editaccount'));
 
     Route::get('/users', array('as' => 'users', 'uses' => 'UsersController@users'));
     Route::post('/users', array('uses' => 'UsersController@editusers'));
-});
 
     Route::get('/users/add', array('as' => 'adduser', 'uses' => 'UsersController@adduser'));
     Route::post('/users/add', array('uses' => 'UsersController@editaccount'));
+});
 
 Route::get('/submit', array('as' => 'submit', 'uses' => 'ProvocationController@create'));
 Route::post('/submit', array('uses' => 'ProvocationController@store'));
 
-App::error(function(ModelNotFoundException $e)
-{
+App::error(function(ModelNotFoundException $e) {
     Session::flash('message', 'This provocation or user was not found');
     return Redirect::route('index');
 });
