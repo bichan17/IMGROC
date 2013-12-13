@@ -25,7 +25,7 @@ class ProvocationsController extends BaseController {
 	    if(Input::has('provocation'))
 		$provocation = Provocation::findOrFail(Input::get('provocation'));
 	    else
-		$provocation = Provocation::whereModStatus('1')->orderBy(DB::raw('RAND()'))->get();
+		$provocation = Provocation::whereModStatus('1')->orderBy(DB::raw('RAND()'))->first();
 
 	    return View::make('imgroc.index', compact('provocation'));
 	}
@@ -52,15 +52,27 @@ class ProvocationsController extends BaseController {
 
 		if ($validation->passes())
 		{
-			$this->provocation->create($input);
+		    // store the uploaded file on our server
+		    if (Input::hasFile('img')) {
+			$file = Input::file('img');
 
-			return Redirect::route('imgroc.index')->with('message', 'Your submission has been sent!');
+			// the file will be stored in something like
+			// imgroc.com/img/123456_mypic.jpg
+			$destinationPath = '/uploads/';
+			$filename = str_random(6) . '_' . $file->getClientOriginalName();
+			$file->move(public_path().$destinationPath, $filename);
+
+			$input["img"] = $destinationPath . $filename;
+		    }
+
+		    $this->provocation->create($input);
+
+		    return Redirect::route('index')->with('message', 'Your submission has been sent!');
 		}
 
-		return Redirect::route('imgroc.create')
+		return Redirect::route('submit')
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -159,24 +171,40 @@ class ProvocationsController extends BaseController {
     public function editprov() {
 	// check for ID, are you 21?
 	if(Input::has('provocation')) $id = Input::get('provocation');
-	else return Response::make('No provocation specified', 400);
+	else return Redirect::route('allprovs')->with('error', 'No provocation specified');
 
-	$prov = Provocation::findOrFail($id);
+	$prov = Provocation::withTrashed()->findOrFail($id);
+
+	// if we're coming from the modqueue, return back there
+	if(isset($_SERVER["HTTP_REFERER"]) && parse_url($_SERVER["HTTP_REFERER"], PHP_URL_PATH) == URL::route('modqueue', array(), false))
+	    $redirect = 'modqueue';
+	else
+	    $redirect = 'allprovs';
 
 	// are we deleting it, changing the moderation status, or what?
-	if(Input::has('delete')) $prov->delete();
-	elseif(Input::has('destroy')) $prov->destroy();
-	elseif(Input::has('restore')) $prov->restore();
-	elseif(Input::has('status')) $status = Input::get('status');
-	else return Response::make('No change specified', 400);
+	if(Input::has('delete')) {
+	    $prov->delete();
+	    $change = 'trashed';
+	} elseif(Input::has('destroy')) {
+	    $prov->forceDelete();
+	    $change = 'deleted permanently';
+	    $redirect = 'trashedprovs';
+	} elseif(Input::has('restore')) {
+	    $prov->restore();
+	    $change = 'restored';
+	} elseif(Input::has('status')) {
+	    $status = Input::get('status');
+	    $change = 'modified';
+	} else 
+	    return Redirect::route('allprovs')->with('error', 'No action specified');
 
 	// if we're changing the status
-	if($status) {
+	if(isset($status)) {
 	    $prov->mod_status = $status;
 	    $prov->save();
 	}   
 
-	return Response::make('Provocation '.$id.' has been modified', 200);
+	return Redirect::route($redirect)->with('message', 'Provocation '.$prov->title.' has been '.$change);
     }
 
     // show all the provocations

@@ -43,9 +43,7 @@
 			<a href="#intro" id="introLink" class="fancybox" data-fancybox-width="800" data-fancybox-height="232">Introduction</a>
 			<a href="{{ URL::route('submit') }}">Submit</a>
 			<a href="#about" id="aboutLink" class="fancybox" data-fancybox-width="800" data-fancybox-height="600">About</a>
-			@if(!Auth::check())
-			    {{ HTML::link('admin', 'Login') }}   
-			@else
+			@if(Auth::check())
 			    {{ HTML::link('admin', 'Admin') }}
 			    {{ HTML::link('logout', 'Logout') }}
 			@endif

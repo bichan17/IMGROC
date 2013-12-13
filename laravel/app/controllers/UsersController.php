@@ -40,13 +40,20 @@ class UsersController extends BaseController {
 	if(Input::has('id')) $input = Input::all();
 	else $input = Input::old();
 
-var_dump($input); return;
+	// only if this isn't a new user
+	if(!(Session::has('newUser') && Session::get('newUser'))) {
+	    // admins can specify which user, others can't
+	    if(User::find(Auth::user()->id)->admin() && !empty($input["id"]))
+		$user = User::findOrFail($input["id"]);
+	    else
+		$user = Auth::user();
+	} else {
+	    if(!Session::has('errors')) Session::forget('newUser');
+	    $user = new User;
+	    $user->id = $input["id"];
+	    $user->admin_level = $input["admin_level"];
+	}
 
-	// admins can specify which user, others can't
-	if(User::find(Auth::user()->id)->admin() && !empty($input["id"])) $user = User::findOrFail($input["id"]);
-	else $user = Auth::user();
-    
-	Session::forget('newUser');
 	Session::flash('admin_level', $user["admin_level"]);
 	return View::make('admin.account', compact('user'));
     }
@@ -78,7 +85,7 @@ var_dump($input); return;
 	$rules = array(
 	    'fullname'	    => 'min:3|max:50|required',
 	    'email'	    => 'min:3|max:50|email|required',
-	    'username'	    => 'max:20|in:'.$user->username.'|required',
+	    'username'	    => 'max:20|required',
 	    'admin_level'   => 'in:0,1|required'
 	);
 	
@@ -102,6 +109,8 @@ var_dump($input); return;
 		     return Redirect::route('account', compact('user'))->withErrors($validator)->withInput($input);
 	    } else {
 		// store the input values
+		if(Session::has('newUser') && Session::get('newUser'))
+		    $user->username = $input["username"];
 		$user->fullname = $input["fullname"];
 		$user->email = $input["email"];
 		$user->admin_level = $input["admin_level"];
@@ -115,7 +124,10 @@ var_dump($input); return;
 	    }
 	}
 
-	return Redirect::route('account', compact('user'));
+	if(Session::has('newUser') && Session::get('newUser'))
+	    return Redirect::route('users');
+	else
+	    return Redirect::route('account', compact('user'));
     }
 
     // display all users

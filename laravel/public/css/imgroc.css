@@ -38,7 +38,7 @@ html, body {
     float: right;
     position: relative;
     height: 82%;
-    overflow: hidden;
+    overflow: visible;
 }
 .overlay {
     padding: 10px;
@@ -392,6 +392,7 @@ div.container div#content.introContent.c2{
     margin-bottom: 20px;
 }
 .provContent{
+    overflow:hidden;
     padding-bottom: 25px;
 }
 #provInfo{
@@ -411,10 +412,11 @@ div.container div#content.introContent.c2{
 /**
  * Bootstrap Overrides / Customizations
  */
-div.container {min-height:2800px;}
-h1 {margin-bottom:20px;}
+div.container {min-height:2800px; overflow:visible;}
+h1 {margin-bottom:20px; margin-top:0;}
 .alert {width:500px; float:right; position:absolute; top:30px; margin-left:200px;}
 a.btn {margin-bottom:15px;}
+.center {text-align:center;}
 
 /**
  * Login Form
@@ -429,6 +431,15 @@ form.form-signin input[type="submit"] {width:400px; margin-top:10px;}
  * Admin Pages
  */
 #admin-nav h4 {font-size:12px; opacity:0.5; padding-left:5px;}
+#admin-nav + h1 {margin-top:20px;}
+
 .form-horizontal .form-group {margin-left:0; margin-right:0;}
 .account-save-btn {margin-left:210px; width:130px;}
 .account-cancel-btn {margin-left:30px; width:130px;}
+
+table.table-provs td img {max-width:150px; max-height:150px;}
+
+/**
+ * Submit Page
+ */
+form.submit-provocation input[type=Submit] {margin-left:145px; margin-top:15px;}

@@ -7,7 +7,6 @@ class Provocation extends Eloquent {
 
 	public static $rules = array(
 		'title' => 'required',
-		'source' => 'required|active_url',
 		'img' => 'image'
 	);
 }

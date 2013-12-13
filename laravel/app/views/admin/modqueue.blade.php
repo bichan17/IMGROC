@@ -6,7 +6,7 @@
 <h1>Provocations in Limbo</h1>
 
 @if (!empty($provocations) && $provocations->count())
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered table-provs">
 	<thead>
 	    <tr>
 		    <th>Title</th>
@@ -22,7 +22,7 @@
 		<tr>
 		    <td>{{{ $provocation->title }}}</td>
 		    <td>{{{ $provocation->source }}}</td>
-		    <td>{{{ ($provocation->img) ? '<img src="'.$provocation->img.'" alt="'.$provocation->title.'" />' : 'No image' }}}</td>
+		    <td>{{ ($provocation->img) ? '<img src="'.$provocation->img.'" alt="'.$provocation->title.'" />' : 'No image' }}</td>
 		    <td>{{{ $provocation->caption }}}</td>
 		    <td>{{{ $provocation->created_at }}}</td>
 		    <td>

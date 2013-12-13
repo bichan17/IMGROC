@@ -1,9 +1,6 @@
 @extends('layouts.scaffold')
 
 @section('main')
-<pre>
-{{ var_dump($_SESSION) }}
-</pre>
     <ul id="admin-nav" class="nav nav-tabs" role="navigation">
 	<h4>{{ (Auth::user()->admin_level) ? 'MODERATOR' : 'ADMIN' }} MENU</h4>
 	<li {{ (Route::currentRouteName() == 'modqueue') ? 'class="active"' : ''}}><a href="{{ URL::route('modqueue') }}">Mod Queue</a></li>

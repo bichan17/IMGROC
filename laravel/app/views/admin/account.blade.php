@@ -20,7 +20,6 @@
     <div class="form-group">
 	{{ Form::label('username', 'Username *', array('class' => 'col-xs-3 control-label')) }}
 	@if($ro)
-{{ $user }}
 	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control', 'readonly'=>'readonly')) }}</div>
 	@else
 	    <div class="col-xs-5">{{ Form::text('username', $user->username, array('class'=>'form-control')) }}</div>

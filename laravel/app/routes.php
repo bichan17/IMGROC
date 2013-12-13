@@ -12,8 +12,7 @@
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 Route::get('/debug', function() {
-    Session::flash('message', 'debug route');
-    return View::make('admin.login');
+    
 });
 
 Route::get('/', array('as' => 'index', 'uses' => 'ProvocationsController@index'));
@@ -45,8 +44,8 @@ Route::group(array('prefix' => '/admin', 'before' => 'auth'), function()
     Route::post('/users/add', array('uses' => 'UsersController@editaccount'));
 });
 
-Route::get('/submit', array('as' => 'submit', 'uses' => 'ProvocationController@create'));
-Route::post('/submit', array('uses' => 'ProvocationController@store'));
+Route::get('/submit', array('as' => 'submit', 'uses' => 'ProvocationsController@create'));
+Route::post('/submit', array('uses' => 'ProvocationsController@store'));
 
 App::error(function(ModelNotFoundException $e) {
     Session::flash('message', 'This provocation or user was not found');

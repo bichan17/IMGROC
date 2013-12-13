@@ -2,15 +2,20 @@
 
 @section('main')
 
-@if($provocation->count() > 0)
+@if(isset($provocation) && $provocation->count() > 0)
 <div class="provContent" id="content">
     <div class="outer-center">
 	<div class="inner-center">
 	    <div class="provTypeImage">
-		<img src="{{{ $provocation->img }}}" alt="{{{ $provocation->title }}}" class="provImage" />
+		@if(!empty($provocation->img))
+		<a href="{{{ $provocation->img }}}" title="Click for full size"><img src="{{{ $provocation->img }}}" alt="{{{ $provocation->title }}}" class="provImage" /></a>
+		@endif
+		@if(!empty($provocation->source))
 		<a href="{{{ $provocation->source }}}" class="captionURL"><h4 class="caption">{{{ $provocation->title }}}</h4></a>
+		@else
+		<h4 class="caption">{{{ $provocation->title }}}</h4>
+		@endif
 		<p class="provCaption">{{{ $provocation->caption }}}</p>
-		<cite>Submitted by: {{{ $provocation->submitted_by }}}</cite>
 	    </div>
 	</div>
     </div>
